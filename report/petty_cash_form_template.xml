@@ -1,0 +1,171 @@
+<odoo>
+    <data>
+
+        <record id="petty_cash_form_id" model="ir.actions.report">
+            <field name="name">Petty Cash Form</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">reports_handling.petty_cash_id</field>
+            <field name="report_file">reports_handling.petty_cash_id</field>
+            <!--            <field name="print_report_name">object.name or 'Purchase_Request_Form'</field>-->
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="petty_cash_id">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <t t-call="reports_handling.header_layout">
+                        <div style="margin-top: 5px; background-color:#08286D;">
+                            <h2 style="text-align:center; padding: 2px; color:white; font-weight: bold;">
+                                PETTY CASH FORM
+                            </h2>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="background-color: #88ABF6;">
+                                    <td style="font-weight: bold; text-align:center" colspan="4">
+                                        Requester Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        <p>Date
+                                            <br></br>
+                                            (mm/dd/yyyy)
+                                        </p>
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        Reference no.
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        Requester Name
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        Department
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 30px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="background-color: #88ABF6;">
+                                    <td style="font-weight: bold; text-align:center" colspan="4">
+                                        Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        Category
+                                    </td>
+                                    <td style="font-weight: bold;">PETTY CASH</td>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        Item Description
+                                    </td>
+                                    <td style="font-weight: bold;">CASH ADVANCE</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        Amount
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        Mode of Payment
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        Justification
+                                    </td>
+                                    <td colspan="3">
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        <br></br>
+                                        Note
+                                    </td>
+                                    <td colspan="3" style="text-align:center;">
+                                        i) Any advances should be cleared with INVOICES
+                                        <br></br>
+                                        ii) All requisitions must be submitted to Accounts via requesting department
+                                        <br></br>
+                                        <br></br>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+
+                        <br></br>
+                        <br></br>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="text-align:center">
+                                    <td rowspan="2" style="font-weight: bold; background-color: #E8EAEE; width:30%;">
+                                        <br></br>
+                                        Prepared by:
+                                    </td>
+                                    <td colspan="3" style="font-weight: bold; background-color: #E8EAEE; width:30%">
+                                        Approval
+                                    </td>
+                                </tr>
+                                <tr style="font-weight:bold; text-align:center;">
+                                    <td>Department Head</td>
+                                    <td>Accounts Department</td>
+                                    <td>GM Approval</td>
+                                </tr>
+                                <tr style="font-weight:bold; text-align:center;">
+                                    <td></td>
+                                    <td>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        SIGNATURE / DATE
+                                    </td>
+                                    <td>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        SIGNATURE / DATE
+                                    </td>
+                                    <td>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        SIGNATURE / DATE
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </t>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

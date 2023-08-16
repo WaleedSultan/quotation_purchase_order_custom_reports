@@ -1,0 +1,228 @@
+<odoo>
+    <data>
+
+        <record id="job_description_form_id" model="ir.actions.report">
+            <field name="name">Job Description Form</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">reports_handling.job_description_id</field>
+            <field name="report_file">reports_handling.job_description_id</field>
+            <!--            <field name="print_report_name">object.name or 'Purchase_Request_Form'</field>-->
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="job_description_id">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <t t-call="reports_handling.header_layout">
+                        <div style="margin-top: 5px; background-color:#08286D;">
+                            <h2 style="text-align:center; padding: 2px; color:white; font-weight: bold;">
+                                JOB DESCRIPTION
+                            </h2>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        JOB TITLE
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        JOB NUMBER
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        JOB LEVEL
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        EMPLOYMENT STATUS
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        DEPARTMENT
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        SECTION
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        LOCATION
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        DIRECT REPORT TO
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 5px; background-color:#08286D;">
+                            <h3 style="text-align:left; padding: 2px; color:white; font-weight: bold;">
+                                JOB PURPOSE
+                            </h3>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+
+                        <div style="margin-top: 25px; background-color:#08286D;">
+                            <h3 style="text-align:left; padding: 2px; color:white; font-weight: bold;">
+                                DUTIES AND RESPONSIBILITIES
+                            </h3>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+
+                        <div style="margin-top: 45px; background-color:#08286D;">
+                            <h3 style="text-align:left; padding: 2px; color:white; font-weight: bold;">
+                                QUALIFICATION
+                            </h3>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+
+                        <div style="margin-top: 65px;">
+                            <h3 style=" background-color:#08286D; text-align:left; padding: 2px; color:white; font-weight: bold;">
+                                WORKING CONDITIONS
+                            </h3>
+                            <ul>
+                                <li>
+                                    Nature or work may require working beyond working hours including client sites
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 65px;">
+                            <h3 style=" background-color:#08286D; text-align:left; padding: 2px; color:white; font-weight: bold;">
+                                PHYSICAL/TRAVEL REQUIREMENTS
+                            </h3>
+                            <ul>
+                                <li>
+                                    Travel within the kingdom of Saudi Arabia, Workshops, Warehouse, Showroom, and
+                                    branches
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 65px;">
+                            <h3 style=" background-color:#08286D; text-align:left; padding: 2px; color:white; font-weight: bold;">
+                                DIRECT REPORTS
+                            </h3>
+                            <ul>
+                                <li>
+                                    N/A
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 65px;">
+                            <h3 style=" background-color:#08286D; text-align:left; padding: 2px; color:white; font-weight: bold;">
+                                APPROVAL
+                            </h3>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        CHECKED BY:
+                                    </td>
+                                    <td>
+                                        <span style="font-weight:bold;">NURA ABDULLAH BIN GHASHAM</span>
+                                        <apan>, Human Resource Manager</apan>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        CHECK DATE:
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        CHECKED BY:
+                                    </td>
+                                    <td>
+                                        <span style="font-weight:bold;">MOHAMMAD ALHASHIM</span>
+                                        <apan>, Chief Executive Officer</apan>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        CHECK DATE:
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="padding-left:20px;">
+                            Statements in the Job Description are intended to reflect, in general, the duties and
+                            responsibilities of the position, but are not to be interpreted as exhaustive.
+                        </div>
+
+                        <div style="margin-top: 65px;">
+                            <h3 style=" background-color:#08286D; text-align:left; padding: 2px; color:white; font-weight: bold;">
+                                Acknowledgement
+                            </h3>
+                        </div>
+
+                        <div style="padding-left:20px;">
+                            I, the undersigned, have read and hereby acknowledge duly performing my duties and
+                            responsibilities listed herein in compliance with BTL Policies and Procedures.
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        SIGNATURE:
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        FULL NAME AND EMPLOYEE NO.:
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        DATE:
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

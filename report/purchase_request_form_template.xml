@@ -1,0 +1,223 @@
+<odoo>
+    <data>
+
+        <record id="purchase_request_form_id" model="ir.actions.report">
+            <field name="name">Purchase Request Form</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">reports_handling.purchase_request_id</field>
+            <field name="report_file">reports_handling.purchase_request_id</field>
+            <!--            <field name="print_report_name">object.name or 'Purchase_Request_Form'</field>-->
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="purchase_request_id">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <t t-call="reports_handling.header_layout">
+                        <div style="margin-top: 5px; background-color:#08286D;">
+                            <h2 style="text-align:center; padding: 2px; color:white; font-weight: bold;">
+                                PURCHASE REQUEST FORM
+                            </h2>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="background-color: #F5F7F9;">
+                                    <td style="font-weight: bold; text-align:center" colspan="4">
+                                        Requester Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        <p>Date
+                                            <br></br>
+                                            (mm/dd/yyyy)
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <t t-if="docs.date_approve">
+                                            <t t-esc="docs.date_approve.strftime('%%m-%%d-%%Y')"/>
+                                        </t>
+                                    </td>
+                                    <td style="font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        Reference no.
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Requester Name
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.partner_id.name"/>
+                                    </td>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Department
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br></br>
+<!--#EEF1F8-->
+                        <div style="margin-top: 30px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="background-color: #F5F7F9;">
+                                    <td style="font-weight: bold; text-align:center" colspan="4">
+                                        Project Proponent Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        Project Title
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        Location
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        PO number
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.name"/>
+                                    </td>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Building no.
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Contact name
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Contact number
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Contact Email add
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Department
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br></br>
+
+                        <div style="margin-top: 30px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="background-color: #EEF1F8;">
+                                    <td style="font-weight: bold; text-align:center" colspan="4">
+                                        Project Description Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        <br></br>
+                                        Category
+                                    </td>
+                                    <td colspan="3" style="font-weight:bold;">
+                                        □ Carpet
+                                        <br></br>
+                                        □ Ceiling
+                                        <br></br>
+                                        □ Tools
+                                        <br></br>
+                                        □ Others: ____________________________
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered" style="width:100%; page-break-before: always;">
+                                <tr style="font-weight: bold; background-color: #08286D; width:200px; color:white; text-align:center;">
+                                    <td>
+                                        Quantity
+                                    </td>
+                                    <td>
+                                        Model
+                                    </td>
+                                    <td>
+                                        Description
+                                    </td>
+                                    <td>
+                                        Price Subtotal
+                                    </td>
+                                </tr>
+                                <t t-foreach="docs.order_line" t-as="line">
+                                    <tr style="text-align:center">
+                                        <td style="background-color: #F5F7F9; height:20px">
+                                            <t t-esc="line.product_qty"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.product_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.price_subtotal"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                            <div style="page-break-inside: avoid;">
+                                <table class="table table-bordered" style="width:100%">
+                                    <tr>
+                                        <td colspan="3"
+                                            style="width: 83%; text-align:right;background-color: #F5F7F9; font-weight:bold; ">Total
+                                        </td>
+                                        <td>
+                                            <t t-esc="json.loads(docs.tax_totals_json)['amount_untaxed']"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3"
+                                            style="width: 83%; text-align:right; background-color: #F5F7F9; font-weight:bold;">VAT
+                                        </td>
+                                        <td>
+                                            <t t-esc="round(json.loads(docs.tax_totals_json)['amount_total'] - json.loads(docs.tax_totals_json)['amount_untaxed'], 2)"/>
+                                        </td>
+                                    </tr>
+    <!--                                <tr>-->
+    <!--                                    <td colspan="3"-->
+    <!--                                        style="text-align:right;background-color: #E8EAEE; font-weight:bold;">-->
+    <!--                                        Currency-->
+    <!--                                    </td>-->
+    <!--                                    <td>-->
+    <!--                                        <t t-esc="docs.currency_id.name"/>-->
+    <!--                                    </td>-->
+    <!--                                </tr>-->
+                                    <tr>
+                                        <td colspan="3"
+                                            style="width: 83%; text-align:right;background-color: #F5F7F9; font-weight:bold;">GRAND
+                                            Total
+                                        </td>
+                                        <td>
+                                            <span t-esc="json.loads(docs.tax_totals_json)['amount_total']"/>
+                                            <span t-esc="docs.currency_id.symbol"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </t>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

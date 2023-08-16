@@ -1,0 +1,230 @@
+<odoo>
+    <data>
+
+        <record id="sale_quotation_form_id" model="ir.actions.report">
+            <field name="name">Quotation Form</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">reports_handling.sale_quotation_id</field>
+            <field name="report_file">reports_handling.sale_quotation_id</field>
+            <!--            <field name="print_report_name">object.name or 'Purchase_Request_Form'</field>-->
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="sale_quotation_id">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <t t-call="reports_handling.header_layout">
+                        <div style=" background-color:#08286D;">
+                            <h2 style="text-align:center; padding: 2px; color:white; font-weight: bold;">
+                                QUOTATION
+                            </h2>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="background-color: #88ABF6;">
+                                    <td style="font-weight: bold; text-align:center" colspan="4">
+                                        Supplier Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        Date (mm/dd/yyyy)
+                                    </td>
+                                    <td>
+                                        <t t-if="docs.date_order">
+                                            <t t-esc="docs.date_order.strftime('%%m-%%d-%%Y')"/>
+                                        </t>
+                                    </td>
+                                    <td style="font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        Reference no.
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Company Name
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.company_id.name"/>
+                                    </td>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Contact no.
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.company_id.phone"/>
+                                    </td>
+                                </tr>
+                                <!--                                <tr>-->
+                                <!--                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">-->
+                                <!--                                        Project Title-->
+                                <!--                                    </td>-->
+                                <!--                                    <td></td>-->
+                                <!--                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">-->
+                                <!--                                        P.O. number-->
+                                <!--                                    </td>-->
+                                <!--                                    <td><t t-esc="docs.client_order_ref"/></td>-->
+                                <!--                                </tr>-->
+                            </table>
+                        </div>
+
+                        <div style="border: 1px solid black;">
+                            <div style="margin-left: 15px; margin-top: 5px;">
+                                <p>Dear Sir/Madame:
+                                    <br></br>
+                                    We are pleased to provide quotation with below details:
+                                </p>
+                            </div>
+
+                            <div>
+                                <table class="table table-bordered" style="width:100%">
+                                    <tr style="background-color: #F6F2F7;">
+                                        <td style="font-weight: bold; text-align:center">
+                                            #
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center">
+                                            PRODUCT NAME
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center">
+                                            DESCRIPTION
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center">
+                                            UNIT
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center">
+                                            QTY
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center">
+                                            UNIT PRICE
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center">
+                                            TOTAL PRICE
+                                        </td>
+                                    </tr>
+                                    <t t-set="seq" t-value="1"/>
+                                    <t t-foreach="docs.order_line" t-as="line">
+                                        <tr>
+                                            <td style="font-weight: bold; text-align:center;">
+                                                <t t-esc="seq"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.product_template_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.product_uom.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.product_uom_qty"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.price_unit"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.price_subtotal"/>
+                                            </td>
+                                            <t t-set="seq" t-value="seq+1"/>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div style="page-break-inside: avoid;">
+                                <table class="table table-bordered" style="width:100%">
+                                    <tr>
+                                        <td colspan="6"
+                                            style="width: 83%; text-align:right;background-color: #F5F7F9; font-weight:bold; ">Total
+                                        </td>
+                                        <td>
+                                            <t t-esc="json.loads(docs.tax_totals_json)['amount_untaxed']"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="6"
+                                            style="width: 83%; text-align:right; background-color: #F5F7F9; font-weight:bold;">VAT
+                                        </td>
+                                        <td>
+                                            <t t-esc="round(json.loads(docs.tax_totals_json)['amount_total'] - json.loads(docs.tax_totals_json)['amount_untaxed'], 2)"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="6"
+                                            style="width: 83%; text-align:right;background-color: #F5F7F9; font-weight:bold;">GRAND
+                                            Total
+                                        </td>
+                                        <td>
+                                            <span t-esc="json.loads(docs.tax_totals_json)['amount_total']"/>
+                                            <span t-esc="docs.currency_id.symbol"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <t t-if="docs.check_approval">
+                            <div style="page-break-inside: avoid; margin-top: 10px; border: 1px solid black;">
+                                <table class="table table-bordered" style="width:100%">
+                                    <tr style="text-align:center">
+                                        <td style="font-weight: bold; background-color: #F5F7F9; width:30%;">
+                                            Prepared by:
+                                        </td>
+                                        <td style="font-weight: bold; background-color: #F5F7F9; width:30%">
+                                            Approved by:
+                                        </td>
+                                        <td style="font-weight: bold; background-color: #F5F7F9; width:40%; padding:5px;">
+                                            Please sign in the designated area
+                                            below as your acknowledgement of this
+                                            order
+                                            <!--                                        confirmation allowing us to-->
+                                            <!--                                        proceed to issue the complete sales-->
+                                            <!--                                        order Accordingly:-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="font-weight:bold; text-align:center;">
+                                            <br></br>
+                                            _____________________________________
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </t>
+
+                        <t t-if="docs.note">
+                            <div style="margin-top: 10px; border: 1px solid black; page-break-inside: avoid;">
+                                <div style="margin-left: 15px;">
+                                    <p style="font-weight:bold; font-style:italic;">TERMS AND CONDITION:</p>
+                                    <P>
+                                        <t t-esc="docs.note"/>
+                                    </P>
+                                    <!--                                <P>Delivery Date:-->
+                                    <!--                                    <t t-if="docs.commitment_date">-->
+                                    <!--                                        <t t-esc="docs.commitment_date.strftime('%%m-%%d-%%Y')"/>-->
+                                    <!--                                    </t>-->
+                                    <!--                                </P>-->
+                                    <!--                                <P>Mode of Payment: Cash</P>-->
+                                    <!--                                <p style="font-weight:bold; font-style:italic;">BANK DETAILS:</p>-->
+                                    <!--                                <P>IBAN:</P>-->
+                                    <!--                                <P>Bank Name:</P>-->
+                                    <!--                                <br></br>-->
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+            </t>
+
+
+        </template>
+
+
+    </data>
+</odoo>

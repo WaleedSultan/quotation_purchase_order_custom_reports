@@ -1,0 +1,217 @@
+<odoo>
+    <data>
+
+        <record id="account_payment_form_id" model="ir.actions.report">
+            <field name="name">Payment Request Form</field>
+            <field name="model">account.payment</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">reports_handling.payment_request_id</field>
+            <field name="report_file">reports_handling.payment_request_id</field>
+            <!--            <field name="print_report_name">object.name or 'Purchase_Request_Form'</field>-->
+            <field name="binding_model_id" ref="account.model_account_payment"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="payment_request_id">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <t t-call="reports_handling.header_layout">
+                        <div style="margin-top: 0px; background-color:#08286D;">
+                            <p style="text-align:center; padding: 2px; color:white; font-weight: bold;">
+                                PAYMENT REQUEST FORM
+                            </p>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <table class="table table-bordered" style=" width:100%">
+                                <tr style=" background-color: #F5F7F9;">
+                                    <td style="padding:2px; font-weight: bold; text-align:center" colspan="4">
+                                        Requester Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px; font-weight: bold; background-color: #F5F7F9; width:25%;">
+                                        Date (mm/dd/yyyy)
+                                    </td>
+                                    <td style="padding:2px; width:25%;">
+                                        <t t-if="docs.date">
+                                            <t t-esc="docs.date.strftime('%%m-%%d-%%Y')"/>
+                                        </t>
+                                    </td>
+                                    <td style="padding:2px;font-weight: bold; background-color: #F5F7F9; width:25%;">
+                                        Reference no.
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px; font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Requester Name
+                                    </td>
+                                    <td>
+                                        <t t-esc="docs.partner_id.name"/>
+                                    </td>
+                                    <td style="font-weight: bold; padding:2px; background-color: #F5F7F9; width:200px;">
+                                        Department
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="background-color: #F5F7F9;">
+                                    <td style="padding:2px; font-weight: bold; text-align:center" colspan="4">
+                                        Payment Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px; font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        Amount
+                                    </td>
+                                    <td><t t-esc="docs.amount"/></td>
+
+                                    <td style="padding:2px; font-weight: bold; background-color: #F5F7F9; width:200px;">
+                                        Currency
+                                    </td>
+                                    <td><t t-esc="docs.currency_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px; font-weight: bold;background-color: #F5F7F9; width:200px;">
+                                        Country
+                                    </td>
+                                    <td><t t-esc="docs.partner_id.country_id.name"/></td>
+
+                                    <td style="font-weight: bold; padding:2px; background-color: #F5F7F9; width:200px;">
+                                        Mode of Payment
+                                    </td>
+                                    <td><t t-esc="docs.journal_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; padding:2px; width:200px;">
+                                        Supplier Name
+                                    </td>
+                                    <td><t t-esc="docs.partner_id.name"/></td>
+
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px; padding:2px;">
+                                        Priority
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px; padding:2px;">
+                                        Project Title
+                                    </td>
+                                    <td></td>
+
+                                    <td style="font-weight: bold;background-color: #F5F7F9; width:200px; padding:2px;">
+                                        P.O No
+                                    </td>
+                                    <td>
+                                        <t t-if="docs.reconciled_bill_ids">
+                                            <t t-esc="docs.reconciled_bill_ids.ref"/>
+                                        </t>
+                                        <t t-if="docs.reconciled_invoice_ids">
+                                            <t t-esc="docs.reconciled_invoice_ids.ref"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr>
+                                    <td style="padding:2px; font-weight: bold; text-align:center; width:200px">
+                                        Description
+                                    </td>
+                                    <td style="font-weight: bold; text-align:center; width:200px; padding:2px;">
+                                        Justification (if applicable)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px;">
+                                        □ PO has been checked
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px;">
+                                        □ Performa invoices matched with PO
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px;">
+                                        □ IBAN is correct. If not registered, provide it in justification
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px;">
+                                        <span>□ Partial Payment</span><span style="margin-left:50px">□ Balance Payment</span>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:2px;">
+                                        □ Advance Payment
+                                    </td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="height:70px" colspan="2">
+                                        Remarks:
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="height:100px" colspan="2">
+                                        Terms and Conditions:
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="text-align:center">
+                                    <td rowspan="2" style="padding:2px; font-weight: bold; background-color: #E8EAEE; width:30%;">
+                                        <br></br>
+                                        Prepared by:
+                                    </td>
+                                    <td colspan="2" style="padding:2px; font-weight: bold; background-color: #E8EAEE; width:30%">
+                                        Approval
+                                    </td>
+                                </tr>
+                                <tr style="font-weight:bold; text-align:center;">
+                                    <td style="padding:2px;">Department Head</td>
+                                    <td style="padding:2px;">CEO/ DEPUTY CEO Approval</td>
+                                </tr>
+                                <tr style="font-weight:bold; text-align:center;">
+                                    <td>
+                                        <br></br>
+                                        <span style="padding:2px;" t-esc="docs.create_uid.name"/>
+                                    </td>
+                                    <td>
+                                        <br></br>
+                                        <br></br>
+                                        SIGNATURE / DATE
+                                    </td>
+                                    <td>
+                                        <br></br>
+                                        <br></br>
+                                        SIGNATURE / DATE
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </t>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

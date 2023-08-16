@@ -1,0 +1,219 @@
+<odoo>
+    <data>
+
+        <record id="purchase_order_form_id" model="ir.actions.report">
+            <field name="name">Purchase Order Form</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">reports_handling.purchase_order_id</field>
+            <field name="report_file">reports_handling.purchase_order_id</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="purchase_order_id">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <t t-call="reports_handling.header_layout">
+                        <div style="margin-top: 5px; background-color:#08286D;">
+                            <h2 style="text-align:center; padding: 2px; color:white; font-weight: bold;">
+                                PURCHASE ORDER FORM
+                            </h2>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <table class="table table-bordered" style="width:100%">
+                                <tr style="background-color: #88ABF6;">
+                                    <td style="font-weight: bold; text-align:center" colspan="4">
+                                        Supplier Details
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        <p>Date (mm/dd/yyyy)
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <t t-if="docs.date_approve">
+                                            <t t-esc="docs.date_approve.strftime('%%m-%%d-%%Y')"/>
+                                        </t>
+                                    </td>
+                                    <td style="font-weight: bold; background-color: #E8EAEE; width:200px;">
+                                        Reference no.
+                                    </td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        Supplier Name
+                                    </td>
+                                    <td><t t-esc="docs.partner_id.name"/></td>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        Supplier Contact
+                                    </td>
+                                    <td><t t-esc="docs.partner_id.phone"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        Project Title
+                                    </td>
+                                    <td></td>
+                                    <td style="font-weight: bold;background-color: #E8EAEE; width:200px;">
+                                        P.O. number
+                                    </td>
+                                    <td><t t-esc="docs.name"/></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="border-top: 1px solid black;">
+                            <div style="margin-left: 15px; margin-top: 10px;">
+                                <p>Dear Sir/Madame:
+                                <br></br>
+                                We are pleased to provide quotation with below details:</p>
+                            </div>
+
+                            <div>
+                                <table class="table table-bordered" style="width:100%">
+                                    <tr style="background-color: #E0CFE4;border: 1px solid black;">
+                                        <td style="font-weight: bold; text-align:center;border: 1px solid black;">
+                                            #
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center;border: 1px solid black;">
+                                            PRODUCT NAME
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center;border: 1px solid black;">
+                                            DESCRIPTION
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center;border: 1px solid black;">
+                                            UNIT
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center;border: 1px solid black;">
+                                            QTY
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center;border: 1px solid black;">
+                                            UNIT PRICE
+                                        </td>
+                                        <td style="font-weight: bold; text-align:center;border: 1px solid black;">
+                                            TOTAL PRICE
+                                        </td>
+                                    </tr>
+                                    <t t-set="seq" t-value="1"/>
+                                    <t t-foreach="docs.order_line" t-as="line">
+                                        <tr style="text-align:center;border: 1px solid black;">
+                                            <td style="background-color: #F5F7F9; height:20px;border: 1px solid black;">
+                                                <t t-esc="seq"/>
+                                            </td>
+                                            <td style="background-color: #F5F7F9; height:20px;border: 1px solid black;">
+                                                <t t-esc="line.product_id.name"/>
+                                            </td>
+                                            <td style="background-color: #F5F7F9; height:20px;border: 1px solid black;">
+                                                <t t-esc="line.name"/>
+                                            </td>
+                                            <td style="background-color: #F5F7F9; height:20px;border: 1px solid black;">
+                                                <t t-esc="line.product_uom.name"/>
+                                            </td>
+                                            <td style="border: 1px solid black;">
+                                                <t t-esc="line.product_qty"/>
+                                            </td>
+                                            <td style="border: 1px solid black;">
+                                                <t t-esc="line.price_unit"/>
+                                            </td>
+                                            <td style="border: 1px solid black;">
+                                                <t t-esc="line.price_subtotal"/>
+                                            </td>
+                                            <t t-set="seq" t-value="seq+1"/>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+
+                            <div style="page-break-inside: avoid;border:">
+                                <table class="table table-bordered" style="width:100%;border: 1px solid black;">
+                                    <tr>
+                                        <td colspan="3"
+                                            style="width: 83%; text-align:right;background-color: #F5F7F9; font-weight:bold; border: 1px solid black;">Total
+                                        </td>
+                                        <td style="border: 1px solid black;">
+                                            <t t-esc="json.loads(docs.tax_totals_json)['amount_untaxed']"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3"
+                                            style="border: 1px solid black; width: 83%; text-align:right; background-color: #F5F7F9; font-weight:bold;">VAT
+                                        </td>
+                                        <td style="border: 1px solid black;">
+                                            <t t-esc="round(json.loads(docs.tax_totals_json)['amount_total'] - json.loads(docs.tax_totals_json)['amount_untaxed'], 2)"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"
+                                            style="border: 1px solid black;width: 83%; text-align:right;background-color: #F5F7F9; font-weight:bold;">GRAND
+                                            Total
+                                        </td>
+                                        <td style="border: 1px solid black;">
+                                            <span t-esc="json.loads(docs.tax_totals_json)['amount_total']"/>
+                                            <span t-esc="docs.currency_id.symbol"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <t t-if="docs.notes">
+                            <div style="margin-top: 10px; border: 1px solid black; page-break-inside: avoid;">
+                                <div style="margin-left: 15px;">
+                                    <p style="font-weight:bold; font-style:italic;">TERMS AND CONDITION:</p>
+                                    <P>
+                                        <t t-esc="docs.notes"/>
+                                    </P>
+                                </div>
+                            </div>
+                        </t>
+
+
+                        <div style="page-break-inside: avoid; margin-top: 20px;">
+                            <table class="table table-bordered" style="width:100%;border: 1px solid black;">
+                                <tr style="text-align:center;border: 1px solid black;">
+                                    <td rowspan="2" style="font-weight: bold; background-color: #E8EAEE; width:30%;border: 1px solid black;">
+                                        <br></br>
+                                        Prepared by:
+                                    </td>
+                                    <td colspan="2" style="font-weight: bold; background-color: #E8EAEE; width:30%;border: 1px solid black;">
+                                        Approval
+                                    </td>
+                                </tr>
+                                <tr style="font-weight:bold; text-align:center;border: 1px solid black;">
+                                    <td style="border: 1px solid black;">Department Head</td>
+                                    <td style="border: 1px solid black;">CEO/ DEPUTY CEO Approval</td>
+                                </tr>
+                                <tr style="font-weight:bold; text-align:center;border: 1px solid black;">
+                                    <td style="border: 1px solid black;">
+                                        <br></br>
+                                        <br></br>
+                                        <span t-esc="docs.create_uid.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        SIGNATURE / DATE
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        SIGNATURE / DATE
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

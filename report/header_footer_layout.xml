@@ -1,0 +1,52 @@
+<odoo>
+    <template id="header_layout">
+        <div class="header">
+            <div class="row" style="report_header_style">
+                <div>
+                    <img class="image" src="/reports_handling/static/src/img/logo.png" width="150px"/>
+                </div>
+                <div>
+                    <img class="image" src="/reports_handling/static/src/img/gyptech.jpg" width="850px"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="article o_report_layout_standard">
+            <div style="position:absolute; opacity:0.35; text-align:center; z-index:999; padding-top:330px; padding-left:145px;">
+                <img class="image" style="border: None; " src="/reports_handling/static/src/img/watermark.png" width="500px"
+                     height="500px"/>
+            </div>
+            <t t-out="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+            <div style="text-align:center; font-weight:bold;">
+                <p>BTL-GEN-F005 Revision 1.0</p>
+            </div>
+            <div style="background-color: #08286D; color:white;">
+                <div>
+                    <span style="padding-left: 30px;"><strong>GYPTECH:</strong>Aramco Vendor ID: 10064288
+                    </span>
+                    <span style="padding-right: 30px; float:right;">
+                        <strong>Landline:</strong>
+                        013-896 2222 / 8675322 fax: 013-814 4381
+                    </span>
+                </div>
+                <div>
+                    <span style="padding-left: 30px;"><strong>PO. BOX:</strong>2668, AL-KHOBAR 31952
+                    </span>
+                    <span style="padding-right: 217px; float:right;"><strong>Email:</strong>info@gyptech.com.sa
+                    </span>
+                </div>
+                <div>
+                    <span style="padding-left: 30px;"><strong>Location:</strong>Sehamla Tower, Prince Sultan St. 5th
+                        Floor
+                    </span>
+                    <span style="padding-right: 195px; float:right;"><strong>Website:</strong>www.gyptech.com.Sa
+                    </span>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>
